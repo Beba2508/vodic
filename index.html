@@ -60,27 +60,6 @@
             background-color: #243E54;
         }
 
-        /* Gumb za offline verziju */
-        .download-btn {
-            background-color: #ff9900;
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            display: inline-block;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        .download-btn:hover {
-            background-color: #e68a00;
-        }
-
-        /* Google Translate stil */
-        #google_translate_element {
-            margin-top: 15px;
-        }
-
     </style>
 </head>
 <body>
@@ -92,14 +71,6 @@
         <input type="text" id="apartmentCode" placeholder="Npr. ZT1">
         <br>
         <button onclick="searchApartment()">Pronađi vodič</button>
-
-        <hr>
-
-        <!-- Google Translate gumb -->
-        <div id="google_translate_element"></div>
-
-        <!-- Gumb za preuzimanje offline vodiča -->
-        <a href="vodic.pdf" download class="download-btn">📥 Preuzmi vodič za offline korištenje</a>
     </div>
 
     <script>
@@ -112,15 +83,7 @@
             let link = `https://bit.ly/Checkininstructions${code}`;
             window.location.href = link;
         }
-
-        // Google Translate integracija
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'hr'}, 'google_translate_element');
-        }
     </script>
-
-    <!-- Google Translate skripta -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
