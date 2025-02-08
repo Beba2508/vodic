@@ -15,14 +15,14 @@
             color: black;
         }
 
-        /* Kontejner sa prozirnijom bijelom pozadinom */
+        /* Kontejner */
         .container {
-            background: rgba(255, 255, 255, 0.75); /* 75% bijela, 25% prozirnost */
+            background: white;
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: inline-block;
-            max-width: 450px;
+            max-width: 420px;
             width: 90%;
         }
 
@@ -35,10 +35,10 @@
 
         /* Unos polja */
         input {
-            padding: 12px;
+            padding: 10px;
             border: 2px solid #365E78;
-            border-radius: 8px;
-            width: 85%;
+            border-radius: 5px;
+            width: 90%;
             font-size: 16px;
             text-align: center;
             outline: none;
@@ -60,28 +60,59 @@
             background-color: #243E54;
         }
 
+        /* Rezultati pretrage */
+        .result {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Pronađite informacije o svom apartmanu</h1>
-        <p>Upišite kod apartmana i pronađite vodič! ✨</p>
+        <h1>Postavite pitanje o svom apartmanu</h1>
+        <p>Upišite pitanje i saznajte informacije iz vodiča! 🔍</p>
 
-        <input type="text" id="apartmentCode" placeholder="Npr. ZT1">
+        <!-- Unos pitanja -->
+        <input type="text" id="searchQuery" placeholder="Npr. Gdje mogu parkirati?">
         <br>
-        <button onclick="searchApartment()">Pronađi vodič</button>
+        <button onclick="searchGuide()">Pretraži</button>
+
+        <!-- Prikaz rezultata -->
+        <div id="result" class="result"></div>
     </div>
 
     <script>
-        function searchApartment() {
-            let code = document.getElementById("apartmentCode").value.toUpperCase().trim();
-            if (code === "") {
-                alert("Molimo unesite ime apartmana.");
-                return;
+        function searchGuide() {
+            let query = document.getElementById("searchQuery").value.toLowerCase().trim();
+            let resultDiv = document.getElementById("result");
+
+            // Definirani odgovori iz vodiča
+            let answers = {
+                "parking": "📍 Najbliži parking možete pronaći u vodiču za svoj apartman. Kliknite ovdje: <a href='https://bit.ly/IrundoFAQ' target='_blank'>Parking Info</a>",
+                "wifi": "📶 Informacije o WiFi lozinki i mreži nalaze se u vodiču apartmana. Pogledajte ovdje: <a href='https://bit.ly/IrundoFAQ' target='_blank'>WiFi Info</a>",
+                "check-in": "🕒 Vrijeme prijave i upute za check-in možete pronaći ovdje: <a href='https://bit.ly/CheckininstructionsZT1' target='_blank'>Check-in Info</a>",
+                "grijanje": "❄️ Upute za grijanje i klima uređaj su u vašem vodiču: <a href='https://bit.ly/IrundoFAQ' target='_blank'>Grijanje Info</a>",
+                "faq": "❓ Pogledajte često postavljana pitanja ovdje: <a href='https://bit.ly/IrundoFAQ' target='_blank'>FAQ</a>"
+            };
+
+            // Provjera da li pitanje sadrži ključne riječi
+            let foundAnswer = null;
+            for (let key in answers) {
+                if (query.includes(key)) {
+                    foundAnswer = answers[key];
+                    break;
+                }
             }
-            let link = `https://bit.ly/Checkininstructions${code}`;
-            window.location.href = link;
+
+            // Prikaz rezultata
+            if (foundAnswer) {
+                resultDiv.innerHTML = foundAnswer;
+            } else {
+                resultDiv.innerHTML = "⚠️ Trenutno nemamo odgovor na ovo pitanje. Pogledajte FAQ: <a href='https://bit.ly/IrundoFAQ' target='_blank'>FAQ</a>";
+            }
         }
     </script>
 
