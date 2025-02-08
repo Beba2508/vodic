@@ -6,7 +6,7 @@
     <title>Vodič kroz apartmane | IRUNDO</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Osnovni stil */
+        /* Postavljanje pozadine s blur efektom i blagom bijelom bojom */
         body {
             font-family: 'IBM Plex Sans', sans-serif;
             background: url('noir_3_photo.jpeg') no-repeat center center fixed;
@@ -17,24 +17,34 @@
             position: relative;
             transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
-
-        /* Maknut overlay preko slike */
+        
+        /* Novi blur efekt i prozirna bijela boja */
         body::before {
-            display: none;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3); /* Lagana bijela pozadina */
+            backdrop-filter: blur(10px); /* Jači blur */
+            z-index: -1;
         }
 
-        /* Kontejner */
+        /* Kontejner s informacijama */
         .container {
-            background: rgba(255, 255, 255, 0.95); 
+            background: rgba(255, 255, 255, 0.85); /* Smanjena prozirnost */
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             display: inline-block;
-            max-width: 420px;
+            max-width: 450px;
+            width: 90%;
             position: relative;
             opacity: 0;
             transform: translateY(-20px);
             animation: fadeIn 1.5s forwards;
+            color: #333; /* Tamniji tekst za čitljivost */
         }
 
         @keyframes fadeIn {
@@ -42,7 +52,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Dark Mode stil */
+        /* Dark Mode */
         body.dark-mode {
             background: #121212;
             color: white;
@@ -56,8 +66,8 @@
 
         /* Logo */
         .logo {
-            width: 160px;
-            margin-bottom: 15px;
+            width: 140px;
+            margin-bottom: 10px;
         }
 
         /* Naslov */
@@ -71,7 +81,7 @@
         p {
             color: #333;
             font-size: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.6;
         }
 
@@ -80,7 +90,7 @@
             padding: 12px;
             border: 2px solid #365E78;
             border-radius: 8px;
-            width: 260px;
+            width: 85%;
             font-size: 16px;
             text-align: center;
             outline: none;
@@ -97,7 +107,7 @@
             background-color: #365E78;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
             margin-top: 12px;
@@ -115,11 +125,11 @@
             transform: scale(0.95);
         }
 
-        /* Dark Mode dugme */
+        /* Dark Mode gumb */
         .toggle-dark-mode {
             background: none;
-            border: 2px solid white;
-            color: white;
+            border: 2px solid #365E78;
+            color: #365E78;
             padding: 8px 16px;
             margin-top: 15px;
             border-radius: 8px;
@@ -129,8 +139,8 @@
         }
 
         .toggle-dark-mode:hover {
-            background: white;
-            color: #365E78;
+            background: #365E78;
+            color: white;
         }
 
         /* FAQ Link */
@@ -146,7 +156,7 @@
         /* Responsivnost */
         @media (max-width: 600px) {
             .container {
-                max-width: 90%;
+                width: 95%;
             }
             input {
                 width: 100%;
@@ -160,14 +170,8 @@
     <div class="container">
         <img src="irundo-1.png" alt="Irundo logo" class="logo">
         <h1>Pronađite informacije o svom apartmanu</h1>
-        <p>
-            Sve informacije o apartmanu, uključujući WiFi, parking i grijanje/hlađenje, 
-            pronađite tako da upišete ime svog apartmana i kliknete na gumb.
-            <br><br>
-            😊 Upišite kod apartmana i pronađite vodič! ✨
-        </p>
+        <p>Upišite kod apartmana i pronađite vodič! ✨</p>
 
-        <!-- Unos koda apartmana -->
         <input type="text" id="apartmentCode" placeholder="Npr. ZT1">
         <br>
         <button onclick="searchApartment()">Pronađi vodič</button>
@@ -222,5 +226,6 @@
 
 </body>
 </html>
+
 
 
