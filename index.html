@@ -6,68 +6,32 @@
     <title>Vodič kroz apartmane | IRUNDO</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Postavljanje pozadine s blur efektom i blagom bijelom bojom */
+        /* Osnovni stil */
         body {
             font-family: 'IBM Plex Sans', sans-serif;
-            background: url('noir_3_photo.jpeg') no-repeat center center fixed;
-            background-size: cover;
+            background: rgba(255, 255, 255, 0.85);
             text-align: center;
             padding: 50px;
-            color: white;
-            position: relative;
-            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-        
-        /* Novi blur efekt i prozirna bijela boja */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.3); /* Lagana bijela pozadina */
-            backdrop-filter: blur(10px); /* Jači blur */
-            z-index: -1;
+            color: black;
         }
 
-        /* Kontejner s informacijama */
+        /* Animacija ulaska stranice */
         .container {
-            background: rgba(255, 255, 255, 0.85); /* Smanjena prozirnost */
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.75); /* 75% bijela, 25% prozirnost */
+            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             display: inline-block;
             max-width: 450px;
             width: 90%;
-            position: relative;
             opacity: 0;
             transform: translateY(-20px);
             animation: fadeIn 1.5s forwards;
-            color: #333; /* Tamniji tekst za čitljivost */
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Dark Mode */
-        body.dark-mode {
-            background: #121212;
-            color: white;
-        }
-
-        .container.dark-mode {
-            background: rgba(34, 34, 34, 0.9);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Logo */
-        .logo {
-            width: 140px;
-            margin-bottom: 10px;
         }
 
         /* Naslov */
@@ -77,15 +41,7 @@
             font-weight: 600;
         }
 
-        /* Tekst */
-        p {
-            color: #333;
-            font-size: 15px;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        /* Unos polja */
+        /* Unos polja s automatskim prijedlozima */
         input {
             padding: 12px;
             border: 2px solid #365E78;
@@ -94,12 +50,6 @@
             font-size: 16px;
             text-align: center;
             outline: none;
-            transition: 0.3s ease-in-out;
-        }
-
-        input:focus {
-            border-color: #243E54;
-            box-shadow: 0 0 8px rgba(36, 62, 84, 0.5);
         }
 
         /* Dugmad */
@@ -107,60 +57,15 @@
             background-color: #365E78;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 12px;
             font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease-in-out;
+            margin-top: 10px;
         }
 
         button:hover {
             background-color: #243E54;
-            transform: scale(1.07);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        /* Dark Mode gumb */
-        .toggle-dark-mode {
-            background: none;
-            border: 2px solid #365E78;
-            color: #365E78;
-            padding: 8px 16px;
-            margin-top: 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .toggle-dark-mode:hover {
-            background: #365E78;
-            color: white;
-        }
-
-        /* FAQ Link */
-        .faq-link {
-            margin-top: 20px;
-            display: block;
-            font-size: 14px;
-            text-decoration: none;
-            color: #365E78;
-            font-weight: bold;
-        }
-
-        /* Responsivnost */
-        @media (max-width: 600px) {
-            .container {
-                width: 95%;
-            }
-            input {
-                width: 100%;
-            }
         }
 
     </style>
@@ -168,28 +73,20 @@
 <body>
 
     <div class="container">
-        <img src="irundo-1.png" alt="Irundo logo" class="logo">
         <h1>Pronađite informacije o svom apartmanu</h1>
         <p>Upišite kod apartmana i pronađite vodič! ✨</p>
 
-        <input type="text" id="apartmentCode" placeholder="Npr. ZT1">
+        <!-- Unos apartmana s automatskim prijedlozima -->
+        <input list="apartments" id="apartmentCode" placeholder="Npr. ZT1">
+        <datalist id="apartments">
+            <option value="ZT1">
+            <option value="DT1">
+            <option value="MT2">
+            <option value="ST5">
+        </datalist>
+        
         <br>
         <button onclick="searchApartment()">Pronađi vodič</button>
-
-        <hr>
-
-        <!-- Pretraga destinacija -->
-        <h2>Informacije o destinaciji</h2>
-        <p>Upišite naziv destinacije i saznajte više!</p>
-        <input type="text" id="destinationInput" placeholder="Npr. Dubrovnik">
-        <br>
-        <button onclick="searchDestination()">Saznaj više</button>
-
-        <br><br>
-        <a href="https://bit.ly/IrundoFAQ" class="faq-link">🔍 Pogledaj često postavljana pitanja (FAQ)</a>
-
-        <br><br>
-        <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌙 Tamni način</button>
     </div>
 
     <script>
@@ -201,26 +98,6 @@
             }
             let link = `https://bit.ly/Checkininstructions${code}`;
             window.location.href = link;
-        }
-
-        function searchDestination() {
-            let destination = document.getElementById("destinationInput").value.toLowerCase().trim();
-            let links = {
-                "dubrovnik": "https://sites.google.com/zigzag.hr/irundo-travel-guide/irundo-travel-guide/english/dubrovnik-en?authuser=0",
-                "zagreb": "https://sites.google.com/zigzag.hr/irundo-travel-guide/irundo-travel-guide/english/zagreb-en?authuser=0",
-                "rovinj": "https://sites.google.com/zigzag.hr/irundo-travel-guide/irundo-travel-guide/english/rovinj-en?authuser=0"
-            };
-
-            if (links[destination]) {
-                window.location.href = links[destination];
-            } else {
-                alert("Trenutno nemamo vodič za ovu destinaciju.");
-            }
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            document.querySelector(".container").classList.toggle("dark-mode");
         }
     </script>
 
