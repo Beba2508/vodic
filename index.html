@@ -6,7 +6,7 @@
     <title>Vodič kroz apartmane | IRUNDO</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Pozadina s blur efektom */
+        /* Postavljanje pozadine */
         body {
             font-family: 'IBM Plex Sans', sans-serif;
             background: url('noir_3_photo.jpeg') no-repeat center center fixed;
@@ -23,7 +23,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Tamni overlay za bolju čitljivost */
+            background: rgba(0, 0, 0, 0.4); /* Tamni overlay */
             backdrop-filter: blur(6px);
             z-index: -1;
         }
@@ -55,7 +55,7 @@
 
         /* Naslov */
         h1 {
-            color: #365E78; /* Irundo plava */
+            color: #365E78;
             font-size: 22px;
             font-weight: 600;
         }
@@ -68,8 +68,8 @@
             line-height: 1.6;
         }
 
-        /* Dropdown stilizacija */
-        select {
+        /* Unos polja */
+        input {
             padding: 12px;
             border: 2px solid #365E78;
             border-radius: 8px;
@@ -80,7 +80,7 @@
             transition: 0.3s ease-in-out;
         }
 
-        select:focus {
+        input:focus {
             border-color: #243E54;
             box-shadow: 0 0 8px rgba(36, 62, 84, 0.5);
         }
@@ -108,16 +108,6 @@
             transform: scale(0.95);
         }
 
-        /* Responsivnost */
-        @media (max-width: 600px) {
-            .container {
-                max-width: 90%;
-            }
-            select {
-                width: 100%;
-            }
-        }
-
     </style>
 </head>
 <body>
@@ -127,30 +117,23 @@
         <h1>Pronađite informacije o svom apartmanu</h1>
         <p>
             Sve informacije o apartmanu, uključujući WiFi, parking i grijanje/hlađenje, 
-            pronađite tako da odaberete ime svog apartmana iz padajućeg izbornika.
+            pronađite tako da upišete ime svog apartmana i kliknete na gumb.
             <br><br>
-            😊 Kliknite na gumb za pretraživanje i pronađite svoj vodič! ✨
+            😊 Upišite kod apartmana i pronađite vodič! ✨
         </p>
 
-        <!-- Dropdown izbornik -->
-        <select id="apartmentSelect">
-            <option value="">Odaberite apartman...</option>
-            <option value="ZT1">ZT1</option>
-            <option value="DT1">DT1</option>
-            <option value="MT2">MT2</option>
-            <option value="ST5">ST5</option>
-        </select>
-        
+        <!-- Unos koda apartmana -->
+        <input type="text" id="apartmentCode" placeholder="Npr. ZT1">
         <br>
         <button onclick="searchApartment()">Pronađi vodič</button>
     </div>
 
     <script>
         function searchApartment() {
-            let code = document.getElementById("apartmentSelect").value;
+            let code = document.getElementById("apartmentCode").value.toUpperCase().trim();
             
             if (code === "") {
-                alert("Molimo odaberite apartman.");
+                alert("Molimo unesite ime apartmana.");
                 return;
             }
 
@@ -161,3 +144,4 @@
 
 </body>
 </html>
+
